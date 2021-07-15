@@ -1,6 +1,7 @@
 package com.ps.lombok;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -15,10 +16,14 @@ public class LombokSingularDemo {
 	@Singular
 	private List<String> names;
 
+	@Singular
+	private Map<Integer, String> students;
+
 	public static void main(String[] args) {
 
 		LombokSingularDemo lsd1 = LombokSingularDemo.builder().id(Long.valueOf(1)).name("Krish")
-				.names(List.of("Prem", "Rohan")).build();
+				.names(List.of("Prem", "Rohan")).student(1, "Peter").student(2, "Martin")
+				.students(Map.of(3, "Philip", 4, "Gerhard")).students(Map.of(5, "Alisa")).build();
 
 		System.out.println(lsd1);
 
