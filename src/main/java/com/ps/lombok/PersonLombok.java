@@ -5,10 +5,7 @@ import java.time.LocalDate;
 import lombok.*;
 
 @AllArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class PersonLombok {
 	@NonNull
 	String firstName;
