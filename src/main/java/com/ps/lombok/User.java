@@ -3,19 +3,20 @@ package com.ps.lombok;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import javax.management.ConstructorParameters;
+
+import lombok.*;
+import lombok.experimental.*;
 
 @Getter
-@Setter
+@Setter @NoArgsConstructor
+@AllArgsConstructor(onConstructor_ = @ConstructorParameters({ "id", "email" }))
 public class User {
 
 	@Setter(AccessLevel.PRIVATE)
 	private Long id;
 
-	//@Getter(AccessLevel.PROTECTED)
+	// @Getter(AccessLevel.PROTECTED)
 	@Accessors(fluent = true)
 	private String username;
 
@@ -25,6 +26,15 @@ public class User {
 	@Getter(AccessLevel.PUBLIC)
 	@Setter(AccessLevel.PRIVATE)
 	private LocalDate lastUpdated;
+	
+	@Getter(onMethod_ = @Deprecated) // JDK8
+	@Setter(onParam_ = @NonFinal)
+	private Character sex;
+	
+	
+	@Getter(onMethod_= {
+		      @Deprecated})
+	private Boolean active;
 
 	public Optional<String> getEmail() {
 		return Optional.ofNullable(email);
@@ -32,6 +42,6 @@ public class User {
 
 	public static void main(String[] args) {
 		User user = new User();
-		System.out.println(user==user.username(null));
+		System.out.println(user == user.username(null));
 	}
 }
